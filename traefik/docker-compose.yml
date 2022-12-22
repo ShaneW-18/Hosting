@@ -1,0 +1,30 @@
+version: "3.7"
+services: 
+  traefik: 
+    image: traefik:latest
+    container_name: traefik
+    restart: always 
+    networks:   
+      - traefik
+    ports: 
+      - 80:80 #http
+      - 443:443  #https
+    volumes:
+      - ./traefik.yml:/etc/traefik/traefik.yml
+      - ./.data/letsencrypt/:/letsencrypt/
+      - ./configs/:/configs/:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    labels:
+      traefik.enable: true
+      traefik.http.routers.dashboard.rule: Host(`traefik.swiles.tech`)
+      traefik.http.routers.dashboard.entrypoints: https
+      traefik.http.routers.dashboard.service: api@internal
+      traefik.http.middlewares.global-compress.compress: true
+    command: 
+      - "--api"
+      - "--providers.docker=true"
+    expose: 
+      - 8080 
+networks: 
+  traefik:
+    name: traefik

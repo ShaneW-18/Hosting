@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+    geoguessr_API:
+        image: ghcr.io/shanew-18/geoguessr-ai:master
+        container_name: geoguessr_API
+        restart: unless-stopped
+        networks:
+            - traefik
+        labels: 
+            traefik.enable: true
+            traefik.http.routers.geoguessr_API.rule: Host(`geoguessrapi.swiles.tech`)
+            traefik.http.routers.geoguessr_API.entrypoints: https
+            traefik.http.services.geoguessr_API.loadbalancer.server.port: 8000
+networks:
+    traefik:
+      external: true

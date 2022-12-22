@@ -1,0 +1,17 @@
+version: '3.7'
+services:
+  zach_lol:
+    image: ghcr.io/day-mon/silly-zach:main
+    container_name: zach_lol
+    restart: always
+    networks:
+      - traefik
+    labels:
+      traefik.enable: true
+      traefik.http.routers.zach_lol.rule: Host(`howtowhipandnaenae.ninja`)
+      traefik.http.routers.zach_lol.entrypoints: https
+      traefik.http.services.zach_lol.loadbalancer.server.port: 4001
+
+networks:
+  traefik:
+    external: true

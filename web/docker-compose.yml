@@ -1,0 +1,17 @@
+version: '3.7'
+services:
+  svelte_website:
+    image: ghcr.io/shanew-18/react-personal-website:master
+    container_name: swiles_tech_website
+    restart: always
+    networks:
+      - traefik
+    labels:
+      traefik.enable: true
+      traefik.http.routers.personal_website.rule: Host(`swiles.tech`)
+      traefik.http.routers.personal_website.entrypoints: https
+      traefik.http.services.personal_website.loadbalancer.server.port: 3000
+
+networks:
+  traefik:
+    external: true
