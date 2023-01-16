@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
     geoguessr_API:
-        image: ghcr.io/shanew-18/geoguessr-ai:master
+        image: ghcr.io/shanew-18/geoguessr-ai/api:master
         container_name: geoguessr_API
         restart: unless-stopped
         networks:

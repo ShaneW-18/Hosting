@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   geo_website:
-    image: ghcr.io/shanew-18/react-personal-website:master
+    image: ghcr.io/shanew-18/geoguessr-ai/web:master
     container_name: geo_web
     restart: always
     networks:
