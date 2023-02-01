@@ -37,6 +37,7 @@ entryPoints:
                         - uptime.swiles.tech
                         - geoguessrapi.swiles.tech
                         - geoguessr.swiles.tech
+                        - vaultwarden.swiles.tech
 providers:
     docker:
         exposedByDefault: false
