@@ -1,0 +1,27 @@
+version: '3.7'
+
+services:
+    zipline:
+        image: ghcr.io/diced/zipline
+        container_name: zipline
+        restart: always
+        environment:
+          - CORE_RETURN_HTTPS=false
+          - CORE_SECRET="${SECRET}"
+          - CORE_HOST=0.0.0.0
+          - CORE_PORT=3009
+          - CORE_DATABASE_URL=postgres://postgres:postgres@postgres/postgres
+          - CORE_LOGGER=true
+        networks:
+          - traefik
+        volumes:
+          - './.uploads:/zipline/uploads'
+          - './.public:/zipline/public'
+        labels: 
+          traefik.enable: true
+          traefik.http.routers.zipline.rule: Host(`zip.swiles.tech`)
+          traefik.http.routers.zipline.entrypoints: https
+          traefik.http.services.zipline.loadbalancer.server.port: 3009
+networks:
+    traefik:
+      external: true

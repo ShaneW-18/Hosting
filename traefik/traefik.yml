@@ -38,6 +38,7 @@ entryPoints:
                         - geoguessrapi.swiles.tech
                         - geoguessr.swiles.tech
                         - vaultwarden.swiles.tech
+                        - zip.swiles.tech
 providers:
     docker:
         exposedByDefault: false
