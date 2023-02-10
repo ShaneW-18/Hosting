@@ -23,8 +23,6 @@ services:
     command: 
       - "--api"
       - "--providers.docker=true"
-    expose: 
-      - 8080 
 networks: 
   traefik:
     name: traefik

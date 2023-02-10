@@ -3,7 +3,7 @@ global:
     sendAnonymousUsage: true
 
 log:
-    level: debug
+    level: info
 
 metrics:
     prometheus:
@@ -38,7 +38,9 @@ entryPoints:
                         - geoguessrapi.swiles.tech
                         - geoguessr.swiles.tech
                         - vaultwarden.swiles.tech
-                        - zip.swiles.tech
+                        - upload.swiles.tech
+                        - database.swiles.tech
+
 providers:
     docker:
         exposedByDefault: false

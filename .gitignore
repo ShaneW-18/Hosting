@@ -1,2 +1,5 @@
 .data
 data/
+enviroment.env
+.uploads
+.public
