@@ -1,14 +1,25 @@
 version: '3.7'
 
 services:
-    database:
+    database-zip:
         image: postgres:14.0
-        container_name: database
+        container_name: database-zip
         restart: unless-stopped
         env_file:
             - enviroment.env
         volumes:
             - ./.data/postgres/:/var/lib/postgresql/data/
+        networks:
+            - database
+            - pgadmin
+    database-workout:
+        image: postgres:14.0
+        container_name: database-workout
+        restart: unless-stopped
+        env_file:
+            - enviroment2.env
+        volumes:
+            - ./.data2/postgres/:/var/lib/postgresql/data2/
         networks:
             - database
             - pgadmin
