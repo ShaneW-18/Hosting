@@ -12,17 +12,6 @@ services:
         networks:
             - database
             - pgadmin
-    database-workout:
-        image: postgres:14.0
-        container_name: database-workout
-        restart: unless-stopped
-        env_file:
-            - enviroment2.env
-        volumes:
-            - ./.data2/postgres/:/var/lib/postgresql/data2/
-        networks:
-            - database
-            - pgadmin
     pgadmin:
         image: dpage/pgadmin4:latest
         container_name: pgadmin

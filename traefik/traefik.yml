@@ -40,6 +40,7 @@ entryPoints:
                         - vaultwarden.swiles.tech
                         - upload.swiles.tech
                         - database.swiles.tech
+                        - workout.swiles.tech
 
 providers:
     docker:
