@@ -41,6 +41,9 @@ entryPoints:
                         - upload.swiles.tech
                         - database.swiles.tech
                         - workout.swiles.tech
+                        - workout-dev.swiles.tech
+                        - gymsocial.swiles.tech
+                        - stream.swiles.tech
 
 providers:
     docker:
@@ -49,7 +52,6 @@ providers:
 
     file:
         directory: '/configs'
-
 
 api:
     dashboard: true

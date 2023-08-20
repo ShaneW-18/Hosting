@@ -2,20 +2,63 @@ version: '3.7'
 
 services: 
   database-workout:
-      image: postgres:14.0
-      container_name: database-workout
-      restart: unless-stopped
-      env_file:
-        - enviroment.env
-      volumes:
-        - ./.data/postgres/:/var/lib/postgresql/data/
-      networks:
-        - database
-      ports:
-        - 5432:5432
+    image: postgres:14.0
+    container_name: database-workout
+    restart: unless-stopped
+    env_file:
+      - enviroment.env
+    volumes:
+      - ./.data/postgres/:/var/lib/postgresql/data/
+    networks:
+      - database
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_MAX_CONNECTIONS: 1000
+  workout-GQL-Prod:
+    image: ghcr.io/shanew-18/workout_site/api-production:master
+    container_name: workout-GQL-Prod
+    restart: unless-stopped
+    env_file:
+      - .env
+    networks:
+      - traefik
+    labels: 
+      traefik.enable: true
+      traefik.http.routers.workout-GQL-Prod.rule: Host(`workout.swiles.tech`)
+      traefik.http.routers.workout-GQL-Prod.entrypoints: https
+      traefik.http.services.workout-GQL-ProdL.loadbalancer.server.port: 4001
+
+  workout-GQL-Dev:
+    image: ghcr.io/shanew-18/workout_site/dev-api:development
+    container_name: workout-GQL-Dev
+    restart: unless-stopped
+    env_file:
+      - .env
+    networks:
+      - traefik
+    labels: 
+      traefik.enable: true
+      traefik.http.routers.workout-GQL-Dev.rule: Host(`workout-dev.swiles.tech`)
+      traefik.http.routers.workout-GQL-Dev.entrypoints: https
+      traefik.http.services.workout-GQL-Dev.loadbalancer.server.port: 4001
+
+  development-web:
+    image: ghcr.io/shanew-18/workout_site/dev-web:development
+    container_name:  development-web
+    restart: always
+    networks:
+      - traefik
+    labels:
+      traefik.enable: true
+      traefik.http.routers.development-web.rule: Host(`gymsocial.swiles.tech`)
+      traefik.http.routers.development-web.entrypoints: https
+      traefik.http.services.development-web.loadbalancer.server.port: 3000
+
 networks:
   database:
     external: true
   pgadmin:
     external: true
-  
+  traefik:
+    external: true

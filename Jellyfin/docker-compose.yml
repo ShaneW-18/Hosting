@@ -1,0 +1,21 @@
+version: '3.7'
+services:
+  jellyfin:
+    image: jellyfin/jellyfin:latest
+    container_name: jellyfin
+    restart: always
+    networks:
+      - traefik
+    volumes:
+      - ./config:/config
+      - ./cache:/cache
+      - ./media:/media
+    labels:
+      traefik.enable: true
+      traefik.http.routers.jellyfin.rule: Host(`stream.swiles.tech`)
+      traefik.http.routers.jellyfin.entrypoints: https
+      traefik.http.services.jellyfin.loadbalancer.server.port: 8096
+
+networks:
+  traefik:
+    external: true

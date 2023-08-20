@@ -4,3 +4,6 @@ enviroment.env
 .uploads
 .public
 enviroment2.env
+.env
+cache
+config
